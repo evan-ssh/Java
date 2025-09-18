@@ -21,37 +21,66 @@ public class Calculator {
 
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
-        
+        double lastResult = 0;
         Boolean running = true;
+        
         do{
-            String optionMenu = "Pick an option\nadd\nsubtract\nmultiply\ndivide\nraise to power\n";
+            String optionMenu = "Pick an option\nAdd\nSubtract\nMultiply\nDivide\nExponent\n";
             System.out.println(optionMenu);
             String option = sc.next();
-            System.out.println("Enter first number\s");
-            double a = sc.nextInt();
-            System.out.println("Enter second number\s");
-            double b = sc.nextInt();
+            
+            double a = 0;
+            while(true){
+                System.out.println("Enter first number (or 'ans'):");
+                String inputA = sc.next();
+                if(inputA.equals("ans")){
+                    a = lastResult;
+                    break;
+                }
+                try{
+                    a = Double.parseDouble(inputA);
+                    break;
+                }catch(NumberFormatException e){
+                    System.out.println("Invalid input. Please enter a number or 'ans' ");
+
+                } 
+            }
+            double b = 0;
+            while(true){
+                System.out.println("Enter second number (or 'ans'):");
+                String inputB = sc.next();
+                if(inputB.equals("ans")){
+                    b = lastResult;
+                    break;
+                }
+                try{
+                    b = Double.parseDouble(inputB);
+                    break;
+                }catch(NumberFormatException e){
+                    System.out.println("Invalid input. Please enter a number or 'ans' ");
+                }
+            }
+
             double result = 0;
             boolean valid = true;
+
             switch (option) {
                 case "add":
                     result = Calculator.add(a,b);
-                    System.out.println("Result =" + result);
+                    
                     break;
                 case "subtract":
                     result = Calculator.sub(a,b);
-                    System.out.println("Result =" + result);
                     break;
                 case "multiply":
                     result = Calculator.mult(a, b);
-                    System.out.println("Result =" + result);
+                    break;
                 case "divide":
-                    result = Calculator.sub(a,b);
-                    System.out.println("Result =" + result);
+                    result = Calculator.div(a,b);
+                    break;
                 case "exponent":
                     result = Calculator.exp(a,b);
-                    System.out.println("Result =" + result);
-            
+                    break;
                 default:
                     System.out.println("Invalid Command");
                     valid = false;
@@ -59,6 +88,7 @@ public class Calculator {
             }
             if(valid){
                 System.out.println("Result = " + result);
+                lastResult = result;
             }
         }while(running);
         sc.close();
