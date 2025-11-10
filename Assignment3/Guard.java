@@ -1,4 +1,4 @@
-package Assignment3;
+package assignment3;
 
 public class Guard implements Action {
     @Override

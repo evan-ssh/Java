@@ -1,4 +1,4 @@
-package Assignment3;
+package assignment3;
 
 public abstract class Item {
     String name;

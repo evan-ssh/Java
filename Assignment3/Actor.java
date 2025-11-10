@@ -1,6 +1,4 @@
-package Assignment3;
-
-import java.awt.Desktop;
+package assignment3;
 
 public class Actor {
     String name;

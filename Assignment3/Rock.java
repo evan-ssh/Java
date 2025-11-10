@@ -1,4 +1,4 @@
-package Assignment3;
+package assignment3;
 
 public class Rock extends Throwable {
     public Rock(String name) {

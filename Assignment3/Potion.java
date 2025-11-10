@@ -1,4 +1,4 @@
-package Assignment3;
+package assignment3;
 
 public class Potion extends Consumable {
     public Potion(String name, int uses) {
