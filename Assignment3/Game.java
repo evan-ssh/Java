@@ -81,11 +81,12 @@ public class Game {
 
             // Inner loop: fight this one enemy
             while (PC.isAlive() && NPC.isAlive()) {
-                System.out.println("\nChoose action:");
+                System.out.println("\nChoose action |"+PC.getHealth() +"HP|");
                 System.out.println("1. Attack");
                 System.out.println("2. Guard");
                 System.out.println("3. Special Attack");
                 System.out.println("4. Use Item");
+                System.out.println("5. View Stats");
 
                 int choice = sc.nextInt();
 
@@ -131,6 +132,12 @@ public class Game {
                         NPC.performAction(attack);
                     }
                     continue; // jump to next round of the loop
+                }
+
+                // ---- OPTION 5: VIEW STATS ----
+                if (choice == 5) {
+                    PC.printStats();
+                    continue; // just show stats, no enemy turn
                 }
 
                 // ---- OPTIONS 1–3 (normal actions) ----

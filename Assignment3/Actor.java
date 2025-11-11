@@ -8,7 +8,7 @@ public class Actor {
     private int skillPoints;
     private Actor target;
     private Item[] inventory;
-    private boolean guarding;   // <-- NEW
+    private boolean guarding;
 
     public Actor(String name, int health, int defense, int stamina, int skillPoints) {
         this.name = name;
@@ -29,7 +29,15 @@ public class Actor {
     public boolean isGuarding() {
         return guarding;
     }
+    
+    public void printStats() {
+        System.out.println("\n=== " + name + " ===");
+        System.out.println("Defense: " + defense);
+        System.out.println("Stamina: " + stamina);
+        System.out.println("Skill Points: " + skillPoints);
+    }
 
+    
     public void setGuarding(boolean guarding) {
         this.guarding = guarding;
     }
@@ -63,7 +71,7 @@ public class Actor {
             }
         }
     }
-    
+
     public void addItem(Item item) {
         for (int i = 0; i < inventory.length; i++) {
             if (inventory[i] == null) {
@@ -96,7 +104,7 @@ public class Actor {
         System.out.println(name + " heals for " + amount + ", total HP: " + health);
     }
 
-    public void boostDefense(int amount) { defense += amount; } // you can leave this, even if Guard stops using it
+    public void boostDefense(int amount) { defense += amount; } 
 
     public void useSkillPoints(int amount) {
         skillPoints -= amount;
