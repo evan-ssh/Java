@@ -1,9 +1,9 @@
 package assignment3;
 
-public class Rock extends ThrowableItem {
+public class Bomb extends ThrowableItem {
 
-    public Rock() {
-        super("Rock");
+    public Bomb() {
+        super("Bomb");
     }
 
     @Override

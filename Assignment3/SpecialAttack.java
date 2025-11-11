@@ -3,17 +3,13 @@ package assignment3;
 public class SpecialAttack implements Action {
     @Override
     public void perform(Actor src, Actor trg) {
-        if (src.stamina < 10) {
-            System.out.println(src.name + " is too tired to perform a special attack!");
+        if (src.getSkillPoints() < 5) {
+            System.out.println(src.getName() + " doesn’t have enough skill points!");
             return;
         }
-
-        int damage = 20 - trg.defense;
-        if (damage < 1) damage = 1;
-
-        trg.health -= damage;
-        src.stamina -= 10;
-
-        System.out.println(src.name + " unleashes a special attack on " + trg.name + " for " + damage + " damage!");
+        src.useSkillPoints(5);
+        int damage = Math.max(0, 25 - trg.getDefense());
+        trg.takeDamage(damage);
+        System.out.println(src.getName() + " performs a special attack on " + trg.getName() + " for " + damage + " damage!");
     }
 }

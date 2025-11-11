@@ -1,8 +1,8 @@
 package assignment3;
 
 public class Potion extends Consumable {
-    public Potion(String name, int uses) {
-        super(name, uses);
+    public Potion() {
+        super("Healing Potion", 1);
     }
 
     @Override
