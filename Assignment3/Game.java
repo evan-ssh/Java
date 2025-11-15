@@ -9,20 +9,19 @@ public class Game {
     private Attack attack;
     private Guard guard;
     private SpecialAttack spAttack;
-    private int enemiesDefeated = 0;   // tracks how far the player gets
+    private int enemiesDefeated = 0;   
     private Random rand = new Random();
+    private boolean firstRound = true; 
 
     public Game() {
-        PC = new Actor("Hero", 100, 5, 50, 10);
+        PC = new Actor("Hero", 100, 5, 50, 0);
         attack = new Attack();
         guard = new Guard();
         spAttack = new SpecialAttack();
     }
 
-    // Return an Action based on menu choice (matches the UML: Action selectAction(int index))
     private Action selectAction(int index) {
         Action result = null;
-
         switch (index) {
             case 1:
                 result = attack;
@@ -36,25 +35,28 @@ public class Game {
             default:
                 break;
         }
-
         return result;
     }
 
-    // Give an item every time an enemy is defeated
     private void giveReward() {
-        int roll = rand.nextInt(3); // 0, 1, or 2
+        if (PC.isEmpty()) {
+            System.out.println("\nInventory is full! No item awarded.");
+            return;
+        }
+
+        int roll = rand.nextInt(3); 
 
         switch (roll) {
             case 0:
-                System.out.println("You found a Healing Potion!");
+                System.out.println("\nYou found a Healing Potion!");
                 PC.addItem(new Potion());
                 break;
             case 1:
-                System.out.println("You found a Bomb!");
+                System.out.println("\nYou found a Bomb!");
                 PC.addItem(new Bomb());
                 break;
             case 2:
-                System.out.println("You found a Rock!");
+                System.out.println("\nYou found a Rock!");
                 PC.addItem(new Rock());
                 break;
             default:
@@ -64,61 +66,55 @@ public class Game {
 
     public void start() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Welcome to the Battle Arena!");
+        System.out.println("Welcome to the Gulag!");
 
-        // Outer loop: keep spawning enemies until the hero dies
         while (PC.isAlive()) {
-            // Make a new enemy, slightly stronger each time
             NPC = new Actor(
-                    "Goblin " + (enemiesDefeated + 1),
-                    60 + enemiesDefeated * 10, // more HP each round
-                    3 + enemiesDefeated,       // more defense each round
+                    "Wolf " + "LVL "+(enemiesDefeated + 1),
+                    50 + enemiesDefeated * 5,
+                    3 + enemiesDefeated,       
                     30,
                     0
             );
 
-            System.out.println("\nA wild " + NPC.getName() + " appears!");
+            System.out.println("\nA " + NPC.getName() + " appears!");
+            firstRound = true; 
 
-            // Inner loop: fight this one enemy
             while (PC.isAlive() && NPC.isAlive()) {
-                System.out.println("\nChoose action |"+PC.getHealth() +"HP|");
-                System.out.println("1. Attack");
-                System.out.println("2. Guard");
-                System.out.println("3. Special Attack");
-                System.out.println("4. Use Item");
-                System.out.println("5. View Stats");
+                System.out.println("\n<<====== Menu =========>>");
+                    System.out.println("X Choose action |"+PC.getHealth() +"HP| X");
+                System.out.println("X 1. Attack  \t\tX");
+                System.out.println("X 2. Guard\t\tX");
+                System.out.println("X 3. Special Attack \tX");
+                System.out.println("X 4. Use Item\t\tX");
+                System.out.println("X 5. View Stats \tX");
+                System.out.println("<<=====================>>");
 
                 int choice = sc.nextInt();
 
-                // ---- OPTION 4: USE ITEM ----
                 if (choice == 4) {
-                    // If inventory is empty, don't waste the turn
                     if (PC.isEmpty()) {
                         System.out.println("You don't have any items to use!");
-                        continue; // back to action menu, no enemy turn
+                        continue; 
                     }
 
-                    // Show inventory before choosing
                     PC.printInventory();
 
-                    System.out.println("\nChoose an item slot (1–5), or 0 to cancel:");
+                    System.out.println("\nChoose an item slot (1/5)");
                     int slotNumber = sc.nextInt();
 
-                    // allow cancel
                     if (slotNumber == 0) {
-                        continue; // back to action menu, no enemy turn
+                        continue;  
                     }
 
-                    int slotIndex = slotNumber - 1;   // 1–5 -> 0–4
+                    int slotIndex = slotNumber - 1; 
 
                     Action itemAction = PC.useItem(slotIndex);
                     if (itemAction == null) {
-                        // invalid or empty slot; don't let enemy hit for free
                         System.out.println("That slot is empty or invalid. Try again.");
-                        continue; // back to action menu, no enemy turn
+                        continue; 
                     }
 
-                    // If it's a Consumable (like Potion), target yourself; otherwise target the enemy
                     if (itemAction instanceof Consume) {
                         PC.selectTarget(PC);
                     } else {
@@ -126,45 +122,61 @@ public class Game {
                     }
                     PC.performAction(itemAction);
 
-                    // Enemy turn after successfully using an item
                     if (NPC.isAlive()) {
+                        System.out.println();
                         NPC.selectTarget(PC);
                         NPC.performAction(attack);
+                        System.out.println();
+                        System.out.println(PC.getName() + " has " + PC.getHealth() + " HP.");
                     }
-                    continue; // jump to next round of the loop
+
+                    if (!firstRound) {
+                        System.out.println();
+                        PC.regenerateStamina(2);
+                    }
+                    continue; 
                 }
 
-                // ---- OPTION 5: VIEW STATS ----
                 if (choice == 5) {
                     PC.printStats();
-                    continue; // just show stats, no enemy turn
+                    continue; 
                 }
 
-                // ---- OPTIONS 1–3 (normal actions) ----
                 Action chosen = selectAction(choice);
 
                 if (chosen != null) {
                     PC.selectTarget(NPC);
                     PC.performAction(chosen);
+                    System.out.println();
+                    System.out.println(NPC.getName() + " has " + NPC.getHealth() + " HP.");
                 } else {
                     System.out.println("Invalid choice!");
                 }
 
-                // Enemy turn if still alive
                 if (NPC.isAlive()) {
+                    System.out.println();
                     NPC.selectTarget(PC);
                     NPC.performAction(attack);
+                    System.out.println();
+                    System.out.println(PC.getName() + " has " + PC.getHealth() + " HP.");
                 }
-            }
 
-            // If the hero died in this fight, stop the game
+                if (!firstRound) {
+                    System.out.println();
+                    PC.regenerateStamina(2);
+                }
+                firstRound = false; 
+            }
+    
             if (!PC.isAlive()) {
                 break;
             }
-
-            // Otherwise, enemy is dead → increase counter, give reward
             enemiesDefeated++;
-            System.out.println("You defeated " + NPC.getName() + "!");
+            System.out.println("\nYou defeated " + NPC.getName() + "!");
+            System.out.println();
+            PC.gainSkillPoint();         
+            System.out.println();
+            PC.regenerateStamina(10);     
             giveReward();
         }
 

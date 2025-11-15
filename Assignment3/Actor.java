@@ -22,19 +22,21 @@ public class Actor {
     public String getName() { return name; }
     public int getHealth() { return health; }
     public int getDefense() { return defense; }
+    public int getStamina() { return stamina; }
     public int getSkillPoints() { return skillPoints; }
     public boolean isAlive() { return health > 0; }
-
-    // NEW: guarding getter/setter
     public boolean isGuarding() {
         return guarding;
     }
     
     public void printStats() {
-        System.out.println("\n=== " + name + " ===");
+        System.out.println("\n<<====== Stats =========>>");
         System.out.println("Defense: " + defense);
         System.out.println("Stamina: " + stamina);
         System.out.println("Skill Points: " + skillPoints);
+        System.out.println("<<======================>>");
+
+
     }
 
     
@@ -53,15 +55,24 @@ public class Actor {
     }
 
     public Action useItem(int index) {
-        if (index < 0 || index >= inventory.length || inventory[index] == null) {
-            System.out.println("Invalid item selection.");
-            return null;
+        if (index >= 0 && index < inventory.length && inventory[index] != null) {
+            Action action = inventory[index].getAction();
+            
+            if (inventory[index] instanceof Consumable) {
+                inventory[index] = null;
+            }
+            
+            if (inventory[index] instanceof ThrowableItem) {
+                inventory[index] = null; 
+            }
+            
+            return action;
         }
-        return inventory[index].getAction();
+        return null;
     }
     
     public void printInventory() {
-        System.out.println("\nInventory:");
+        System.out.println("\nInventory (0 to cancel):");
         for (int i = 0; i < inventory.length; i++) {
             int displayIndex = i + 1; 
             if (inventory[i] != null) {
@@ -76,7 +87,6 @@ public class Actor {
         for (int i = 0; i < inventory.length; i++) {
             if (inventory[i] == null) {
                 inventory[i] = item;
-                System.out.println(name + " obtained " + item.getName());
                 return;
             }
         }
@@ -86,17 +96,26 @@ public class Actor {
 
     public boolean isEmpty() {
         for (int i = 0; i < inventory.length; i++) {
-            if (inventory[i] != null) {
+            if (inventory[i] == null) {
                 return false; 
             }
         }
-        return true; 
+        return true;
     }
 
     public void takeDamage(int amount) {
+        if (guarding) {
+            int originalAmount = amount;
+            amount = amount / 2; 
+            guarding = false; 
+            System.out.println(name + " blocks some damage! (" + originalAmount + " reduced to " + amount + ")");
+        }
         health -= amount;
         if (health < 0) health = 0;
-        System.out.println(name + " now has " + health + " HP.");
+    }
+
+    public void useStamina(int amount) {
+        stamina -= amount;
     }
 
     public void restoreHealth(int amount) {
@@ -106,8 +125,14 @@ public class Actor {
 
     public void boostDefense(int amount) { defense += amount; } 
 
-    public void useSkillPoints(int amount) {
-        skillPoints -= amount;
-        if (skillPoints < 0) skillPoints = 0;
+    public void regenerateStamina(int amount) {
+        stamina += amount;
+        System.out.println("You recover " + amount + " stamina. Total: " + stamina);
+    }
+
+    public void gainSkillPoint() {
+        skillPoints++;
+        System.out.println("You gained a skill point! Total: " + skillPoints);
+    
     }
 }

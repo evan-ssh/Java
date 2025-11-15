@@ -7,6 +7,6 @@ public class Potion extends Consumable {
 
     @Override
     public Action getAction() {
-        return new Consume(this);
+        return new Consume();
     }
 }
