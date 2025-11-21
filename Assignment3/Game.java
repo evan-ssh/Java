@@ -94,13 +94,13 @@ public class Game {
 
                 if (choice == 4) {
                     if (PC.isEmpty()) {
-                        System.out.println("You don't have any items to use!");
+                        System.out.println("❌You don't have any items to use!");
                         continue; 
                     }
 
                     PC.printInventory();
 
-                    System.out.println("\nChoose an item slot (1/5)");
+                    System.out.println("\n🔎Choose an item slot (1/5)");
                     int slotNumber = sc.nextInt();
 
                     if (slotNumber == 0) {
@@ -111,7 +111,7 @@ public class Game {
 
                     Action itemAction = PC.useItem(slotIndex);
                     if (itemAction == null) {
-                        System.out.println("That slot is empty or invalid. Try again.");
+                        System.out.println("❌ That slot is empty or invalid. Try again.");
                         continue; 
                     }
 
@@ -172,7 +172,7 @@ public class Game {
                 break;
             }
             enemiesDefeated++;
-            System.out.println("\nYou defeated " + NPC.getName() + "!");
+            System.out.println("\n🔰 You defeated " + NPC.getName() + "! 🔰");
             System.out.println();
             PC.gainSkillPoint();         
             System.out.println();
@@ -180,7 +180,7 @@ public class Game {
             giveReward();
         }
 
-        System.out.println("\nGame over! You defeated " + enemiesDefeated + " enemies.");
+        System.out.println("\n🪦 Game over! You defeated " + enemiesDefeated + " enemies. 🪦");
         sc.close();
     }
 
