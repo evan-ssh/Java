@@ -1,4 +1,4 @@
-package TriviaProject;
+
 
 public class Question {
     private String question;          
