@@ -4,6 +4,7 @@ public class Game {
     private QuestionPool questionPool;
     private Medal medals;
     private Scanner Sc;
+    private GameMode currentGameMode;
 
 
     public static void main(String[] args) {
@@ -22,12 +23,12 @@ public class Game {
 
         while (isRunning) {
             System.out.println();
-            System.out.println("🐾😸 Cat Trivia 😸🐾");
+            System.out.println("<====Cat Trivia====>");
             System.out.println("Questions available: " + questionPool.getCount());
             System.out.println("1) Play Game");
             System.out.println("2) Add Question");
             System.out.println("3) Quit");
-            System.out.print("Choose an option: ");
+            System.out.print("\nChoose an option: ");
 
             String menuChoice = Sc.nextLine().trim();
             switch (menuChoice) {
@@ -56,26 +57,45 @@ public class Game {
             return;
         }
 
+        currentGameMode = chooseMode();
+
         System.out.print("Enter your name: ");
         String playerName = Sc.nextLine();
         Player player = new Player(playerName);
 
-        Question[] gameQuestions = questionPool.shuffleQuestions(10);
+        currentGameMode.initPlayer(player);
+
+        int maxQuestions = currentGameMode.questionLimit();
+        Question[] gameQuestions = questionPool.shuffleQuestions(maxQuestions);
         int totalQuestions = gameQuestions.length;
         int questionsAsked = 0;
-
-        while (questionsAsked < totalQuestions) {
+        while (currentGameMode.canContinue(player, questionsAsked, totalQuestions)) {
             Question currentQuestion = gameQuestions[questionsAsked];
             boolean answeredCorrectly = askQuestion(currentQuestion, questionsAsked + 1);
 
             if (answeredCorrectly) {
                 player.incScore();
-            } 
+            } else {
+                if (player.getLives() > 0) {
+                    player.decLives();
+                    System.out.println("Lives remaining: " + player.getLives());
+                }
+            }
 
             questionsAsked++;
+       
+        }
+
+        if (!player.isAlive() && questionsAsked < totalQuestions) {
+            System.out.println();
+            System.out.println("You ran out of lives before finishing all the questions!");
+            System.out.println("Better luck next time!");
+            return;  
         }
 
         showResults(player, questionsAsked);
+
+        
     }
 
     private boolean askQuestion(Question question, int questionNumber) {
@@ -144,7 +164,7 @@ public class Game {
         int correctAnswers = player.getCorrectCount();
 
         System.out.println();
-        System.out.println("🏆🏆 Results 🏆🏆");
+        System.out.println("<====Results====>");
         System.out.println("Player: " + player.getName());
         System.out.println("Questions answered: " + questionsAsked);
         System.out.println("You answered " + correctAnswers + "/" + questionsAsked +" questions correctly");
@@ -170,7 +190,7 @@ public class Game {
         }
 
         System.out.println();
-        System.out.println("✏️✏️ Add a New Question ✏️✏️");
+        System.out.println("<====Add New Question====>");
 
         System.out.print("Enter question: ");
         String questionText = Sc.nextLine();
@@ -199,5 +219,28 @@ public class Game {
         questionPool.addQuestion(newQuestion);
 
         System.out.println("Succesfully added - Total questions: " + questionPool.getCount());
+    }
+    private GameMode chooseMode() {
+        while (true) {
+            System.out.println();
+            System.out.println("Choose difficulty:");
+            System.out.println("1) Easy        (no lives, Too easy)");
+            System.out.println("2) Difficult   (3 lives, Little harder)");
+            System.out.println("3) Impossible  (1 life, Impossible Challenge)");
+            System.out.print("Enter option: ");
+
+            String choice = Sc.nextLine().trim();
+
+            switch (choice) {
+                case "1":
+                    return new EasyMode();
+                case "2":
+                    return new DifficultMode();
+                case "3":
+                    return new ImpossibleMode();
+                default:
+                    System.out.println("Invalid difficulty Enter 1-3");
+            }
+        }
     }
 }
