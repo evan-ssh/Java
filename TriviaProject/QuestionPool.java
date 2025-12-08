@@ -3,61 +3,55 @@
 
 public class QuestionPool {
     private Question[] questions;
-    private int count;
+    private int questionCount;
 
     public QuestionPool(int capacity) {
         questions = new Question[capacity];
-        count = 0;
+        questionCount = 0;
         loadDefaultQuestions();
     }
 
     public int getCount() {
-        return count;
+        return questionCount;
     }
 
     public boolean isEmpty() {
-        return count == 0;
+        return questionCount == 0;
     }
 
     public boolean isFull() {
-        return count >= questions.length;
+        return questionCount >= questions.length;
     }
 
-    public void addQuestion(Question q) {
-        if (q != null && !isFull()) {
-            questions[count] = q;
-            count++;
+    public void addQuestion(Question newQ) {
+        if (newQ != null && !isFull()) {
+            questions[questionCount] = newQ;
+            questionCount++;
         }
     }
 
 
-    public Question[] getRandomQuestions(int maxQuestions) {
-        if (count == 0) {
+    public Question[] shuffleQuestions(int maxQuestions) {
+        if (questionCount == 0) {
             return new Question[0];
         }
 
-        Question[] copy = new Question[count];
-        for (int i = 0; i < count; i++) {
-            copy[i] = questions[i];
+        for (int i = questionCount - 1; i > 0; i--) {
+            int randomIndex = (int)(Math.random() * (i + 1)); 
+
+            Question currentQ = questions[i];
+            questions[i] = questions[randomIndex];
+            questions[randomIndex] = currentQ;
         }
 
-
-        for (int i = count - 1; i > 0; i--) {
-            int j = (int) (Math.random() * (i + 1)); 
-
-            Question temp = copy[i];
-            copy[i] = copy[j];
-            copy[j] = temp;
+        int questionLimit = maxQuestions;
+        if (questionLimit > questionCount) {
+            questionLimit = questionCount;
         }
 
-        int limit = maxQuestions;
-        if (limit > count) {
-            limit = count;
-        }
-
-        Question[] result = new Question[limit];
-        for (int i = 0; i < limit; i++) {
-            result[i] = copy[i];
+        Question[] result = new Question[questionLimit];
+        for (int i = 0; i < questionLimit; i++) {
+            result[i] = questions[i];
         }
 
         return result;
@@ -65,7 +59,7 @@ public class QuestionPool {
 
 
     private void loadDefaultQuestions() {
-        String[][] data = {
+        String[][] defaultQuestions = {
                 {
                         "Which Alaskan town had a cat as its mayor for almost 20 years?",
                         "Talkeetna, Alaska",
@@ -173,14 +167,14 @@ public class QuestionPool {
                 }
         };
 
-        for (int i = 0; i < data.length && !isFull(); i++) {
-            String text = data[i][0];
-            String correct = data[i][1];
-            String wrong1 = data[i][2];
-            String wrong2 = data[i][3];
-            String wrong3 = data[i][4];
+        for (int i = 0; i < defaultQuestions.length && !isFull(); i++) {
+            String questionStr = defaultQuestions[i][0];
+            String correct = defaultQuestions[i][1];
+            String wrong1 = defaultQuestions[i][2];
+            String wrong2 = defaultQuestions[i][3];
+            String wrong3 = defaultQuestions[i][4];
 
-            Question q = new Question(text, correct, wrong1, wrong2, wrong3, 0);
+            Question q = new Question(questionStr, correct, wrong1, wrong2, wrong3, 0);
             addQuestion(q);
         }
     }
