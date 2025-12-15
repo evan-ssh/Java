@@ -1,3 +1,4 @@
+package primeex;
 public class PrimeCheck {
     static boolean isPrime(int n){
         if(n<=1){
