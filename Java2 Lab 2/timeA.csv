@@ -1,0 +1,116 @@
+Structure,n,Operation,ns/op,Growth ratio,Program's Big-O guess
+ArrayList,1000,add(at end),560.00,1.0000,baseline
+ArrayList,1000,contains,13720.00,1.0000,baseline
+ArrayList,1000,get(i),1060.00,1.0000,baseline
+ArrayList,1000,add(at front),1640.00,1.0000,baseline
+ArrayList,10000,add(at end),140.00,0.2500,O(1) / near-flat
+ArrayList,10000,contains,67240.00,4.9009,O(log n) or cache effects
+ArrayList,10000,get(i),460.00,0.4340,O(1) / near-flat
+ArrayList,10000,add(at front),3040.00,1.8537,O(1) / near-flat
+ArrayList,100000,add(at end),4520.00,32.2857,O(n) / noisy
+ArrayList,100000,contains,309560.00,4.6038,O(log n) or cache effects
+ArrayList,100000,get(i),1560.00,3.3913,O(log n) or cache effects
+ArrayList,100000,add(at front),28020.00,9.2171,O(n)
+ArrayList,1000000,add(at end),1000.00,0.2212,O(1) / near-flat
+ArrayList,1000000,contains,573760.00,1.8535,O(1) / near-flat
+ArrayList,1000000,get(i),3820.00,2.4487,O(log n) or cache effects
+ArrayList,1000000,add(at front),368580.00,13.1542,O(n)
+ArrayList,10000000,add(at end),1700.00,1.7000,O(1) / near-flat
+ArrayList,10000000,contains,4768500.00,8.3110,O(n)
+ArrayList,10000000,get(i),6040.00,1.5812,O(1) / near-flat
+ArrayList,10000000,add(at front),3950480.00,10.7181,O(n)
+LinkedList,1000,add(at end),1140.00,1.0000,baseline
+LinkedList,1000,contains,12760.00,1.0000,baseline
+LinkedList,1000,get(i),3940.00,1.0000,baseline
+LinkedList,1000,add(at front),1160.00,1.0000,baseline
+LinkedList,10000,add(at end),180.00,0.1579,O(1) / near-flat
+LinkedList,10000,contains,58100.00,4.5533,O(log n) or cache effects
+LinkedList,10000,get(i),20120.00,5.1066,O(log n) or cache effects
+LinkedList,10000,add(at front),920.00,0.7931,O(1) / near-flat
+LinkedList,100000,add(at end),460.00,2.5556,O(log n) or cache effects
+LinkedList,100000,contains,274660.00,4.7274,O(log n) or cache effects
+LinkedList,100000,get(i),149840.00,7.4473,O(n)
+LinkedList,100000,add(at front),2020.00,2.1957,O(log n) or cache effects
+LinkedList,1000000,add(at end),1360.00,2.9565,O(log n) or cache effects
+LinkedList,1000000,contains,2144480.00,7.8078,O(n)
+LinkedList,1000000,get(i),1430460.00,9.5466,O(n)
+LinkedList,1000000,add(at front),7320.00,3.6238,O(log n) or cache effects
+LinkedList,10000000,add(at end),2260.00,1.6618,O(1) / near-flat
+LinkedList,10000000,contains,30268540.00,14.1146,O(n)
+LinkedList,10000000,get(i),31567860.00,22.0683,O(n) / noisy
+LinkedList,10000000,add(at front),17300.00,2.3634,O(log n) or cache effects
+HashSet,1000,add,4100.00,1.0000,baseline
+HashSet,1000,contains,5680.00,1.0000,baseline
+HashSet,1000,remove,3780.00,1.0000,baseline
+HashSet,10000,add,1180.00,0.2878,O(1) / near-flat
+HashSet,10000,contains,3240.00,0.5704,O(1) / near-flat
+HashSet,10000,remove,1460.00,0.3862,O(1) / near-flat
+HashSet,100000,add,560.00,0.4746,O(1) / near-flat
+HashSet,100000,contains,3900.00,1.2037,O(1) / near-flat
+HashSet,100000,remove,3840.00,2.6301,O(log n) or cache effects
+HashSet,1000000,add,860.00,1.5357,O(1) / near-flat
+HashSet,1000000,contains,6140.00,1.5744,O(1) / near-flat
+HashSet,1000000,remove,6380.00,1.6615,O(1) / near-flat
+HashSet,10000000,add,2020.00,2.3488,O(log n) or cache effects
+HashSet,10000000,contains,9380.00,1.5277,O(1) / near-flat
+HashSet,10000000,remove,7080.00,1.1097,O(1) / near-flat
+TreeSet,1000,add,3920.00,1.0000,baseline
+TreeSet,1000,contains,4320.00,1.0000,baseline
+TreeSet,1000,remove,4620.00,1.0000,baseline
+TreeSet,10000,add,440.00,0.1122,O(1) / near-flat
+TreeSet,10000,contains,1920.00,0.4444,O(1) / near-flat
+TreeSet,10000,remove,1940.00,0.4199,O(1) / near-flat
+TreeSet,100000,add,4600.00,10.4545,O(n)
+TreeSet,100000,contains,6520.00,3.3958,O(log n) or cache effects
+TreeSet,100000,remove,4340.00,2.2371,O(log n) or cache effects
+TreeSet,1000000,add,1120.00,0.2435,O(1) / near-flat
+TreeSet,1000000,contains,9340.00,1.4325,O(1) / near-flat
+TreeSet,1000000,remove,8080.00,1.8618,O(1) / near-flat
+TreeSet,10000000,add,2580.00,2.3036,O(log n) or cache effects
+TreeSet,10000000,contains,10480.00,1.1221,O(1) / near-flat
+TreeSet,10000000,remove,6720.00,0.8317,O(1) / near-flat
+HashMap,1000,put,1600.00,1.0000,baseline
+HashMap,1000,get,1660.00,1.0000,baseline
+HashMap,1000,containsKey,2860.00,1.0000,baseline
+HashMap,10000,put,340.00,0.2125,O(1) / near-flat
+HashMap,10000,get,760.00,0.4578,O(1) / near-flat
+HashMap,10000,containsKey,260.00,0.0909,O(1) / near-flat
+HashMap,100000,put,820.00,2.4118,O(log n) or cache effects
+HashMap,100000,get,2400.00,3.1579,O(log n) or cache effects
+HashMap,100000,containsKey,620.00,2.3846,O(log n) or cache effects
+HashMap,1000000,put,6840.00,8.3415,O(n)
+HashMap,1000000,get,5140.00,2.1417,O(log n) or cache effects
+HashMap,1000000,containsKey,860.00,1.3871,O(1) / near-flat
+HashMap,10000000,put,2280.00,0.3333,O(1) / near-flat
+HashMap,10000000,get,10920.00,2.1245,O(log n) or cache effects
+HashMap,10000000,containsKey,980.00,1.1395,O(1) / near-flat
+TreeMap,1000,put,1780.00,1.0000,baseline
+TreeMap,1000,get,2080.00,1.0000,baseline
+TreeMap,1000,containsKey,1400.00,1.0000,baseline
+TreeMap,10000,put,600.00,0.3371,O(1) / near-flat
+TreeMap,10000,get,3520.00,1.6923,O(1) / near-flat
+TreeMap,10000,containsKey,1000.00,0.7143,O(1) / near-flat
+TreeMap,100000,put,1020.00,1.7000,O(1) / near-flat
+TreeMap,100000,get,6940.00,1.9716,O(1) / near-flat
+TreeMap,100000,containsKey,2060.00,2.0600,O(log n) or cache effects
+TreeMap,1000000,put,3300.00,3.2353,O(log n) or cache effects
+TreeMap,1000000,get,14760.00,2.1268,O(log n) or cache effects
+TreeMap,1000000,containsKey,1440.00,0.6990,O(1) / near-flat
+TreeMap,10000000,put,2080.00,0.6303,O(1) / near-flat
+TreeMap,10000000,get,7300.00,0.4946,O(1) / near-flat
+TreeMap,10000000,containsKey,860.00,0.5972,O(1) / near-flat
+PriorityQueue,1000,offer,2580.00,1.0000,baseline
+PriorityQueue,1000,poll,3960.00,1.0000,baseline
+PriorityQueue,1000,peek,1080.00,1.0000,baseline
+PriorityQueue,10000,offer,660.00,0.2558,O(1) / near-flat
+PriorityQueue,10000,poll,2680.00,0.6768,O(1) / near-flat
+PriorityQueue,10000,peek,200.00,0.1852,O(1) / near-flat
+PriorityQueue,100000,offer,920.00,1.3939,O(1) / near-flat
+PriorityQueue,100000,poll,3860.00,1.4403,O(1) / near-flat
+PriorityQueue,100000,peek,280.00,1.4000,O(1) / near-flat
+PriorityQueue,1000000,offer,2040.00,2.2174,O(log n) or cache effects
+PriorityQueue,1000000,poll,6920.00,1.7927,O(1) / near-flat
+PriorityQueue,1000000,peek,300.00,1.0714,O(1) / near-flat
+PriorityQueue,10000000,offer,3220.00,1.5784,O(1) / near-flat
+PriorityQueue,10000000,poll,12520.00,1.8092,O(1) / near-flat
+PriorityQueue,10000000,peek,420.00,1.4000,O(1) / near-flat

@@ -1,0 +1,31 @@
+collection,n,operation,yourNsOp,jdkNsOp,yourBytesElem,jdkBytesElem,yourBigO,jdkBigO
+MyArrayList vs ArrayList,1000,add,8.134,9.028,0,20,O(1) / cache effects,O(1) / cache effects
+MyArrayList vs ArrayList,10000,add,1.797,2.190,20,20,O(1) / cache effects,O(1) / cache effects
+MyArrayList vs ArrayList,100000,add,1.852,4.093,20,20,O(1) / cache effects,O(1) / cache effects
+MyArrayList vs ArrayList,1000000,add,5.534,8.203,20,20,O(1) / cache effects,O(1) / cache effects
+MyArrayList vs ArrayList,10000000,add,5.951,5.538,20,20,O(1) / cache effects,O(1) / cache effects
+MyArrayList vs ArrayList,1000,get(index),3.838,3.602,0,20,O(1) / cache effects,O(1) / cache effects
+MyArrayList vs ArrayList,10000,get(index),1.367,1.273,20,20,O(1) / cache effects,O(1) / cache effects
+MyArrayList vs ArrayList,100000,get(index),3.377,3.459,20,20,O(1) / cache effects,O(1) / cache effects
+MyArrayList vs ArrayList,1000000,get(index),14.403,12.167,20,20,O(1) / cache effects,O(1) / cache effects
+MyArrayList vs ArrayList,10000000,get(index),23.887,23.283,20,20,O(1) / cache effects,O(1) / cache effects
+MyArrayList vs ArrayList,1000,contains,1655.100,355.850,0,20,O(n),O(n)
+MyArrayList vs ArrayList,10000,contains,16495.000,3336.500,20,20,O(n),O(n)
+MyArrayList vs ArrayList,100000,contains,171235.000,42725.000,20,20,O(n),O(n)
+MyArrayList vs ArrayList,1000000,contains,1802900.000,1036350.000,20,20,O(n),O(n)
+MyArrayList vs ArrayList,10000000,contains,21610400.000,12234200.000,20,20,O(n),O(n)
+MyHashMap vs HashMap,1000,put,15.202,9.444,64,72,O(1) / cache effects,O(1) / cache effects
+MyHashMap vs HashMap,10000,put,8.394,8.616,62,70,O(1) / cache effects,O(1) / cache effects
+MyHashMap vs HashMap,100000,put,8.260,8.517,66,74,O(1) / cache effects,O(1) / cache effects
+MyHashMap vs HashMap,1000000,put,8.281,8.130,68,76,O(1) / cache effects,O(1) / cache effects
+MyHashMap vs HashMap,10000000,put,8.410,8.392,63,71,O(1) / cache effects,O(1) / cache effects
+MyHashMap vs HashMap,1000,get,7.865,8.941,64,72,O(1) / cache effects,O(1) / cache effects
+MyHashMap vs HashMap,10000,get,4.377,4.111,62,70,O(1) / cache effects,O(1) / cache effects
+MyHashMap vs HashMap,100000,get,12.667,9.301,66,74,O(1) / cache effects,O(1) / cache effects
+MyHashMap vs HashMap,1000000,get,37.839,36.494,68,76,O(1) / cache effects,O(1) / cache effects
+MyHashMap vs HashMap,10000000,get,56.351,50.719,63,71,O(1) / cache effects,O(1) / cache effects
+MyHashMap vs HashMap,1000,containsKey,3.488,9.010,64,72,O(1) / cache effects,O(1) / cache effects
+MyHashMap vs HashMap,10000,containsKey,4.320,3.084,62,70,O(1) / cache effects,O(1) / cache effects
+MyHashMap vs HashMap,100000,containsKey,13.033,12.686,66,74,O(1) / cache effects,O(1) / cache effects
+MyHashMap vs HashMap,1000000,containsKey,33.736,27.083,68,76,O(1) / cache effects,O(1) / cache effects
+MyHashMap vs HashMap,10000000,containsKey,49.562,42.552,63,71,O(1) / cache effects,O(1) / cache effects

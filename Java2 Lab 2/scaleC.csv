@@ -1,0 +1,4 @@
+Resting orders,Live data (GB),Events processed,Events / sec,Bytes per order,GC / slowdown notes,submit ns,cancel ns,best bid ns,total GC count,total GC time ms
+230642,0.064564,1000000,82432.175,279.933,GC active,3400,900,1100,2,11
+460756,0.148995,2000000,40030.560,323.371,GC active,12600,3100,100,4,29
+690671,0.213385,3000000,27664.842,308.953,GC active,2900,19200,0,7,62

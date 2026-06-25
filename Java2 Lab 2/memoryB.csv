@@ -1,0 +1,8 @@
+Structure,Elements held,Heap used (MB),Bytes per element
+ArrayList,1000000,18.00,18
+LinkedList,1000000,42.00,44
+HashSet,1000000,60.00,62
+TreeSet,1000000,56.00,58
+HashMap,1000000,76.00,79
+TreeMap,1000000,72.00,75
+PriorityQueue,1000000,22.00,23
